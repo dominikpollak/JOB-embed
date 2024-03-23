@@ -1,9 +1,7 @@
 console.log("Hello, world!");
 
-function handleClick(event) {
-  if (event.target.classList.contains("jamonbread")) {
-    console.log("Button with class 'jamonbread' clicked!");
-  }
-}
+const btn = document.getElementById("jamonbread");
 
-document.body.addEventListener("click", handleClick);
+btn.addEventListener("click", () => {
+  console.log("Jamon bread is the best!");
+});
