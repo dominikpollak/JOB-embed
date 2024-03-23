@@ -3,3 +3,5 @@ export function handleClick(event) {
     console.log("Button with class 'jamonbread' clicked!");
   }
 }
+
+document.body.addEventListener("click", handleClick);
