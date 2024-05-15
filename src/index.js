@@ -34,7 +34,7 @@ for (let i = 0; i < btn.length; i++) {
 
   btn[i].addEventListener("click", async (e) => {
     // const iframeSrc = `https://mainnet-stage.jamonbread.tech/iframe/asset/${config.fingerprint}?theme=dark`;
-    const iframeSrc = `http://localhost:3000/iframe/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${jamConfig.buttonType}&showPopup=${jamConfig.showPopup}`;
+    const iframeSrc = `https://mainnet-stage.jamonbread.tech/iframe/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${jamConfig.buttonType}&showPopup=${jamConfig.showPopup}`;
     const newWindow = window.open(iframeSrc, "_blank");
     setTimeout(function () {
       newWindow.postMessage(
