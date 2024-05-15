@@ -3,19 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
   <body>
+    <iframe
+      id="job_frame"
+      src=""
+      width="380"
+      height="870"
+      scrolling="no"
+      allow="fullscreen"
+    ></iframe>
     <button
-      id="jamonbread"
-      data-policyId="062b1da3d344c1e6208ef908b2d308201e7ff6bcfddf0f606249817f"
-      data-assetName="asset1pxf697hf3gnrn3rkyv5un97deru2fa6j7a24un"
-    >
-      tlacitko
-    </button>
-    <script
-      src="https://cdn.jsdelivr.net/gh/dominikpollak/JOB-embed@d2754a5c5b4412b4e0ddb7c41c35766ee0ec1270/src/index.js"
-      defer
-    ></script>
+      style="display: none"
+      class="jamonbread"
+      data-config='{
+         "fingerprint": "asset122hkh8rytcysj838mrudsmfp7c4smce3pc4775"
+       }'
+    ></button>
+
+    <script>
+      const jamConfig = {
+        affilCode: "",
+        theme: "dark",
+        buttonType: "buy",
+        buttonLabel: "Buy now",
+        logoUrl:
+          "https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg",
+        logoSize: "30px",
+        fallbackButtonLabel: "Make Offer",
+        projectName: "Stag Alliance",
+        nameFontSize: "20px",
+        showPopup: false,
+      };
+
+      const buttonStyles = {
+        display: "block",
+        borderRadius: 0,
+        borderWidth: "1px",
+        borderColor: "#ffffff",
+        borderStyle: "solid",
+        color: "#ffffff",
+        backgroundColor: "#000",
+        paddingBottom: "10px",
+        paddingTop: "10px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        fontSize: "16px",
+        fontWeight: 500,
+        cursor: "pointer",
+        outline: "none",
+        boxShadow: "none",
+      };
+
+      const fallbackButtonStyles = {
+        display: "block",
+        borderRadius: "50px",
+        borderWidth: "3px",
+        borderColor: "#000000",
+        borderStyle: "solid",
+        color: "#000000",
+        backgroundColor: "#ffffff",
+        paddingBottom: "10px",
+        paddingTop: "10px",
+        paddingLeft: "38px",
+        paddingRight: "38px",
+        fontSize: "20px",
+        fontWeight: "800",
+        cursor: "pointer",
+        outline: "none",
+        boxShadow: "none",
+      };
+    </script>
+    <script src="dist/bundle.js" type="module" />
   </body>
 </html>
