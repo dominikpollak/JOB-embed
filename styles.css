@@ -1,6 +1,37 @@
-#job_frame {
+.job_asset_button {
   display: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  border-radius: 0;
+  border-width: 1px;
+  border-color: #ffffff;
+  border-style: solid;
+  color: #ffffff;
+  background-color: #000;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
+
+.job_asset_fallback_button {
+  display: block;
+  border-radius: 50px;
+  border-width: 6px;
+  border-color: #ff0000;
+  border-style: solid;
+  color: #ff0000;
+  background-color: #000;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
 }

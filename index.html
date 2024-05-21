@@ -7,82 +7,82 @@
     <title>Document</title>
   </head>
   <body>
-    <iframe
-      id="job_frame"
-      src=""
-      width="380"
-      height="870"
-      scrolling="no"
-      allow="fullscreen"
-    ></iframe>
+    <!-- <iframe
+      src="https://mainnet-stage.jamonbread.tech/iframe/collectionList/1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e?theme=dark&dw=grid&pn=&ls=30px&lu=https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg&nfs=14px&a="
+      style="
+        width: 60%;
+        height: 1200px;
+        border-width: 3px;
+        border-color: #00faf6;
+        border-style: solid;
+      "
+      className="jamonbread"
+    /> -->
+
+    <button
+      class="jamonbread job_asset_button"
+      data-config='{
+         "fingerprint": "asset1zvf32gdrxxa6yk3c0ytrc87fy6a9r2947g5qn4",
+         "buttonLabel": "Buy now",
+         "fallbackButtonLabel": "Make Offer"
+       }'
+    />
     <!-- <button
       style="display: none"
       class="jamonbread"
       data-config='{
-         "fingerprint": "asset122hkh8rytcysj838mrudsmfp7c4smce3pc4775"
-       }'
-    ></button> -->
-    <button
-      style="display: none"
-      class="jamonbread"
-      data-config='{
-          "policyid": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e"
-        }'
-    />
+      "policyid": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e"
+    }'
+    /> -->
 
     <script>
       const jamConfig = {
         affilCode: "",
         theme: "dark",
-        buttonType: "collectionOffer",
-        buttonLabel: "Buy now",
+        buttonType: "buy",
         logoUrl:
           "https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg",
         logoSize: "30px",
-        fallbackButtonLabel: "Make Offer",
-        projectName: "Stag Alliance",
-        nameFontSize: "20px",
-        showPopup: false,
+        projectName: "",
+        nameFontSize: "14px",
+        showPopup: true,
       };
 
-      const buttonStyles = {
-        display: "block",
-        borderRadius: 0,
-        borderWidth: "1px",
-        borderColor: "#ffffff",
-        borderStyle: "solid",
-        color: "#ffffff",
-        backgroundColor: "#000",
-        paddingBottom: "10px",
-        paddingTop: "10px",
-        paddingLeft: "20px",
-        paddingRight: "20px",
-        fontSize: "16px",
-        fontWeight: 500,
-        cursor: "pointer",
-        outline: "none",
-        boxShadow: "none",
-      };
+      // const jamConfig = {
+      //   affilCode: "",
+      //   theme: "dark",
+      //   buttonType: "collectionOffer",
+      //   buttonLabel: "Buy now",
+      //   logoUrl:
+      //     "https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg",
+      //   logoSize: "30px",
+      //   fallbackButtonLabel: "Make Offer",
+      //   projectName: "Stag Alliance",
+      //   nameFontSize: "20px",
+      //   showPopup: false,
+      // };
 
-      const fallbackButtonStyles = {
-        display: "block",
-        borderRadius: "50px",
-        borderWidth: "3px",
-        borderColor: "#000000",
-        borderStyle: "solid",
-        color: "#000000",
-        backgroundColor: "#ffffff",
-        paddingBottom: "10px",
-        paddingTop: "10px",
-        paddingLeft: "38px",
-        paddingRight: "38px",
-        fontSize: "20px",
-        fontWeight: "800",
-        cursor: "pointer",
-        outline: "none",
-        boxShadow: "none",
-      };
+      // const buttonStyles = {
+      //   display: "block",
+      //   borderRadius: 0,
+      //   borderWidth: "1px",
+      //   borderColor: "#ffffff",
+      //   borderStyle: "solid",
+      //   color: "#ffffff",
+      //   backgroundColor: "#000",
+      //   paddingBottom: "10px",
+      //   paddingTop: "10px",
+      //   paddingLeft: "20px",
+      //   paddingRight: "20px",
+      //   fontSize: "16px",
+      //   fontWeight: 500,
+      //   cursor: "pointer",
+      //   outline: "none",
+      //   boxShadow: "none",
+      // };
+
+      // src="https://cdn.jsdelivr.net/gh/dominikpollak/JOB-embed@master/dist/bundle.js"
     </script>
-    <script src="dist/bundle.js" type="module" />
+    <script src="/dist/bundle.js" type="module" />
   </body>
 </html>
