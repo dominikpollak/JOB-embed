@@ -35,3 +35,22 @@
   outline: none;
   box-shadow: none;
 }
+
+.job_collectionInfo_button {
+  display: block;
+  border-radius: 0;
+  border-width: 1px;
+  border-color: #ffffff;
+  border-style: solid;
+  color: #ffffff;
+  background-color: #ff0000;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}

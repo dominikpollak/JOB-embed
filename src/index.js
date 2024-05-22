@@ -24,7 +24,9 @@ for (let i = 0; i < btn.length; i++) {
           btn[i].innerHTML = config.fallbackButtonLabel;
           btn[i].classList.remove("job_asset_button");
           btn[i].classList.add("job_asset_fallback_button");
-          console.log(btn[i].classList);
+        } else if (jamConfig.alwaysDisplayButton) {
+          btn[i].innerHTML = config.buttonLabel;
+          btn[i].style.display = "block";
         }
       } else {
         btn[i].innerHTML = config.buttonLabel;
@@ -37,9 +39,9 @@ for (let i = 0; i < btn.length; i++) {
     let iframeSrc = "";
     // if (jamConfig.buttonType === "collectionOffer") {
     if (btn[i].classList.contains("job_collectionInfo_button")) {
-      iframeSrc = `https://mainnet-stage.jamonbread.tech/iframe/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}`;
+      iframeSrc = `http://localhost:3000/iframe/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}`;
     } else {
-      iframeSrc = `https://mainnet-stage.jamonbread.tech/iframe/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${jamConfig.buttonType}&showPopup=${jamConfig.showPopup}`;
+      iframeSrc = `http://localhost:3000/iframe/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${jamConfig.buttonType}&showPopup=${jamConfig.showPopup}`;
     }
 
     const newWindow = window.open(iframeSrc, "_blank");
