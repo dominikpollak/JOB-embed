@@ -778,7 +778,7 @@ for (let i = 0; i < btn.length; i++) {
     if (btn[i].classList.contains("job_collectionInfo_button")) {
       iframeSrc = `${url}/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}`;
     } else if (btn[i].classList.contains("job_asset_button")) {
-      iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${jamConfig.buttonType}&showPopup=${jamConfig.showPopup}`;
+      iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}`;
     }
 
     const newWindow = window.open(iframeSrc, "_blank");
