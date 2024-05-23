@@ -7,23 +7,31 @@
     <title>Document</title>
   </head>
   <body>
+    <div
+      id="iframe_list_div"
+      data-config='{
+      "policyId" : "omen",
+      "logoUrl": "",
+      "logoSize": "30px",
+      "projectName": "",
+      "nameFontSize": "14px",
+      "theme": "dark",
+      "defaultView": "list",
+      "affilCode" : ""
+    }'
+    ></div>
+
     <!-- <iframe
-      src="https://mainnet-stage.jamonbread.tech/iframe/collectionList/1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e?theme=dark&dw=grid&pn=&ls=30px&lu=https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg&nfs=14px&a="
-      style="
-        width: 60%;
-        height: 1200px;
-        border-width: 3px;
-        border-color: #00faf6;
-        border-style: solid;
-      "
-      className="jamonbread"
+      src="http://localhost:3000/iframe/collectionList/da286f15e0de865e3d50fec6fa0484d7e2309671dc4ba8ce6bdd122b?theme=dark&dw=list&pn=&ls=30px&lu=&nfs=14px&a="
+      class="job_iframe"
     /> -->
 
     <button
       class="jamonbread job_asset_button"
       data-config='{
-         "fingerprint": "asset1zvf32gdrxxa6yk3c0ytrc87fy6a9r2947g5qn4",
+         "fingerprint": "asset1wwwx62j8rgstrcq2npxfckafmf7pz9hmmm0n54",
          "buttonLabel": "Buy now",
+         "buttonType": "buy",
          "fallbackButtonLabel": "Make Offer"
        }'
     />
@@ -40,7 +48,6 @@
       const jamConfig = {
         affilCode: "",
         theme: "dark",
-        buttonType: "buy",
         logoUrl:
           "https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg",
         logoSize: "30px",
@@ -48,6 +55,8 @@
         nameFontSize: "14px",
         showPopup: true,
         alwaysDisplayButton: true,
+        wallet:
+          "addr1q8ckgy0c2uc4lkktrsxcjatgsysp5r0shap9zjrw7ap0mk9a5z2lvuywz78cykx4m8wnzmctv9r279exdmjz4uzc92rq26wrv9",
       };
 
       // const jamConfig = {
