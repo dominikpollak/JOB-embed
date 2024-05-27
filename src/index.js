@@ -73,15 +73,26 @@ for (let i = 0; i < btn.length; i++) {
     })();
   }
 
+  let newWindow;
+
   btn[i].addEventListener("click", async (e) => {
     let iframeSrc = "";
     if (btn[i].classList.contains("job_collectionInfo_button")) {
       iframeSrc = `${url}/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}`;
+      newWindow = window.open(
+        iframeSrc,
+        "_blank",
+        "toolbar=no,location=no, menubar=no, titlebar=no, scrollbars=no,resizable=yes,top=0,left=200,width=1100,height=800"
+      );
     } else if (btn[i].classList.contains("job_asset_button")) {
       iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}`;
+      newWindow = window.open(
+        iframeSrc,
+        "_blank",
+        "toolbar=no,location=no, menubar=no, titlebar=no, scrollbars=no,resizable=yes,top=0,left=500,width=420,height=800"
+      );
     }
 
-    const newWindow = window.open(iframeSrc, "_blank");
     setTimeout(function () {
       newWindow.postMessage(
         {
