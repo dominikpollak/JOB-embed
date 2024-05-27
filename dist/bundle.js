@@ -732,7 +732,10 @@ for (let i = 0; i < btn.length; i++) {
       config.buttonType === "list")
   ) {
     (async () => {
-      const fingerprintRes = await translateFingerprint(config.fingerprint);
+      const fp = config.fingerprint.includes("asset")
+        ? config.fingerprint
+        : `asset${config.fingerprint}`;
+      const fingerprintRes = await translateFingerprint(fp);
 
       const res = await fetchNftListing(
         fingerprintRes.policyId,

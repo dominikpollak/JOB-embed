@@ -10,7 +10,7 @@
     <div
       id="iframe_list_div"
       data-config='{
-      "policyId" : "omen"
+      "policyId" : "pavia"
     }'
     ></div>
 
@@ -20,14 +20,13 @@
     /> -->
 
     <button
-      class="jamonbread job_asset_button"
+      class="jamonbread job_collectionInfo_button"
       data-config='{
-         "fingerprint": "asset1cc2qnlattu7cgfdc3ufupslmqna8rklesva3wc",
-         "buttonLabel": "Buy now",
-         "buttonType": "buy",
-         "fallbackButtonLabel": "Make Offer"
-       }'
-    />
+        "policyid": "pavia",
+        "buttonLabel": "Make collection offer",
+        "buttonType": "collectionOffer"
+      }'
+    ></button>
 
     <!-- <button
       style="display: none"
@@ -41,13 +40,13 @@
       const jamConfig = {
         affilCode: "",
         defaultView: "grid",
-        theme: "dark",
+        theme: "blue",
         logoUrl: "",
         logoSize: "30px",
         projectName: "Yes yes yesss",
         nameFontSize: "14px",
       };
     </script>
-    <script src="/dist/bundle.js" type="module" />
+    <script src="/dist/bundle.js" />
   </body>
 </html>
