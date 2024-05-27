@@ -724,7 +724,7 @@ for (let i = 0; i < btn.length; i++) {
 
   if (config.policyid && config.buttonType === "collectionOffer") {
     btn[i].innerHTML = config.buttonLabel;
-    btn[i].style.display = "block";
+    btn[i].style.display = "inline-block";
   } else if (
     config.fingerprint &&
     (config.buttonType === "buy" ||
@@ -767,11 +767,11 @@ for (let i = 0; i < btn.length; i++) {
           btn[i].classList.add("job_asset_fallback_button");
         } else if (jamConfig.alwaysDisplayButton) {
           btn[i].innerHTML = config.buttonLabel;
-          btn[i].style.display = "block";
+          btn[i].style.display = "inline-block";
         }
       } else {
         btn[i].innerHTML = config.buttonLabel;
-        btn[i].style.display = "block";
+        btn[i].style.display = "inline-block";
       }
     })();
   }
