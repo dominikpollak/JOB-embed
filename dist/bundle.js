@@ -763,7 +763,7 @@ for (let i = 0; i < btn.length; i++) {
       if (!res.sellOrder && config.buttonType === "buy") {
         if (config.fallbackButtonLabel) {
           btn[i].innerHTML = config.fallbackButtonLabel;
-          btn[i].classList.remove("job_asset_button");
+          btn[i].classList.remove("job_asset_buy_button");
           btn[i].classList.add("job_asset_fallback_button");
         } else if (jamConfig.alwaysDisplayButton) {
           btn[i].innerHTML = config.buttonLabel;
@@ -788,7 +788,7 @@ for (let i = 0; i < btn.length; i++) {
         "toolbar=no,location=no, menubar=no, titlebar=no, scrollbars=no,resizable=yes,top=0,left=200,width=1100,height=800"
       );
     } else if (
-      btn[i].classList.contains("job_asset_button") ||
+      btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
       btn[i].classList.contains("job_asset_fallback_button")
     ) {
       iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}`;
