@@ -84,7 +84,10 @@ for (let i = 0; i < btn.length; i++) {
         "_blank",
         "toolbar=no,location=no, menubar=no, titlebar=no, scrollbars=no,resizable=yes,top=0,left=200,width=1100,height=800"
       );
-    } else if (btn[i].classList.contains("job_asset_button")) {
+    } else if (
+      btn[i].classList.contains("job_asset_button") ||
+      btn[i].classList.contains("job_asset_fallback_button")
+    ) {
       iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}`;
       newWindow = window.open(
         iframeSrc,
