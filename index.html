@@ -8,21 +8,21 @@
   </head>
   <body>
     <button
-      class="jamonbread job_asset_buy_button"
+      class="jamonbread job_asset_offer_button"
       data-config='{
     "fingerprint": "1256x5ydm3je0d7p0n8eswcquagetc27pvs6exl",
-    "buttonType" : "buy",
+    "buttonType" : "offer",
     "buttonLabel": "Buy now",
-    "fallbackButtonLabel": "Make Offer"
-  }'
+    "fallbackButtonLabel": ""
+   }'
     ></button>
 
-    <!-- <div
+    <div
       id="iframe_list_div"
       data-config='{
       "policyId" : "omen"
     }'
-    ></div> -->
+    ></div>
 
     <!-- <iframe
       src="http://localhost:3000/iframe/collectionList/da286f15e0de865e3d50fec6fa0484d7e2309671dc4ba8ce6bdd122b?theme=dark&dw=list&pn=&ls=30px&lu=&nfs=14px&a="
@@ -48,17 +48,18 @@
 
     <script>
       const jamConfig = {
-        affilCode: "",
+        affilCode: "seeses",
         theme: "dark",
-        logoUrl: "",
+        logoUrl: "https://www.smashingmagazine.com/images/logo.svg",
         logoSize: "30px",
         projectName: "",
         nameFontSize: "14px",
         showPopup: true,
         wallet: "",
-        alwaysDisplayButton: false,
+        alwaysDisplayButton: true,
       };
     </script>
-    <script src="/dist/bundle.js" />
+    <!-- <script src="https://cdn.jsdelivr.net/gh/dominikpollak/JOB-embed@main/dist/bundle.js" /> -->
+    <script src="/dist/bundle.js"></script>
   </body>
 </html>

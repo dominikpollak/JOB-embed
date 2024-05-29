@@ -721,6 +721,7 @@ if (iframeDiv) {
 
 for (let i = 0; i < btn.length; i++) {
   const config = JSON.parse(btn[i].dataset.config);
+  console.log(config);
 
   if (config.policyid && config.buttonType === "collectionOffer") {
     btn[i].innerHTML = config.buttonLabel;
@@ -777,11 +778,10 @@ for (let i = 0; i < btn.length; i++) {
   }
 
   let newWindow;
-
   btn[i].addEventListener("click", async (e) => {
     let iframeSrc = "";
     if (btn[i].classList.contains("job_collectionInfo_button")) {
-      iframeSrc = `${url}/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}`;
+      iframeSrc = `${url}/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
@@ -791,7 +791,8 @@ for (let i = 0; i < btn.length; i++) {
       btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
       btn[i].classList.contains("job_asset_fallback_button")
     ) {
-      iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}`;
+      console.log("yes");
+      iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
