@@ -3,7 +3,7 @@ import { translateFingerprint } from "../utils/translateFingerprint.js";
 
 const url = jamConfig.testnet
   ? "https://testnet-stage.jamonbread.tech/iframe"
-  : "https://mainnet-stage.jamonbread.tech/iframe";
+  : "https://jamonbread.io/iframe";
 
 const btn = document.getElementsByClassName("jamonbread");
 const iframeDiv = document.getElementById("iframe_list_div");
@@ -18,7 +18,6 @@ if (iframeDiv) {
 
 for (let i = 0; i < btn.length; i++) {
   const config = JSON.parse(btn[i].dataset.config);
-  console.log(config);
 
   if (config.policyid && config.buttonType === "collectionOffer") {
     btn[i].innerHTML = config.buttonLabel;
@@ -88,7 +87,6 @@ for (let i = 0; i < btn.length; i++) {
       btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
       btn[i].classList.contains("job_asset_fallback_button")
     ) {
-      console.log("yes");
       iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
