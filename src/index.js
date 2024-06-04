@@ -3,6 +3,7 @@ import { renderAssetElements } from "../utils/renderAssetElements.js";
 import { renderGraphs } from "../utils/renderGraphs.js";
 import { translateFingerprint } from "../utils/translateFingerprint.js";
 
+console.log("test");
 const jamConfig = window.jamConfig;
 console.log("jamConfig", jamConfig);
 
