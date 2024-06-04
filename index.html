@@ -7,55 +7,112 @@
     <title>Document</title>
   </head>
   <body>
-    <button
-      class="jamonbread job_asset_offer_button"
-      data-config='{
-    "fingerprint": "1256x5ydm3je0d7p0n8eswcquagetc27pvs6exl",
+    <a href="/page1.html">Page 1</a>
+    <div class="col">
+      <span
+        class="iframe_thumbnail_span"
+        data-config='{
+      "fingerprint": "1gwwfazx4lh88xyktlk893hq0ptnet98y3h9lwe"
+    }'
+      ></span>
+
+      <span
+        class="iframe_price_span"
+        data-config='{
+      "fingerprint": "1gwwfazx4lh88xyktlk893hq0ptnet98y3h9lwe",
+      "priceFallback": ""
+    }'
+      ></span>
+      <button
+        class="jamonbread job_asset_offer_button"
+        data-config='{
+    "fingerprint": "1gwwfazx4lh88xyktlk893hq0ptnet98y3h9lwe",
     "buttonType" : "offer",
     "buttonLabel": "Buy now",
     "fallbackButtonLabel": ""
    }'
+      ></button>
+    </div>
+
+    <button
+      class="jamonbread job_asset_offer_button"
+      data-config='{
+  "fingerprint": "1a2jed7x7pwzya2zgx06fxu608my27pp0ya7tjd",
+  "buttonType" : "offer",
+  "buttonLabel": "Make offer",
+  "fallbackButtonLabel": ""
+ }'
     ></button>
 
+    <span
+      class="iframe_thumbnail_span"
+      data-config='{
+    "fingerprint": "1a2jed7x7pwzya2zgx06fxu608my27pp0ya7tjd"
+  }'
+    ></span>
+
+    <span
+      class="iframe_price_span"
+      data-config='{
+    "fingerprint": "1a2jed7x7pwzya2zgx06fxu608my27pp0ya7tjd",
+    "priceFallback": "Not for sale"
+  }'
+    ></span>
+
+    <button
+      class="jamonbread job_asset_offer_button"
+      data-config='{
+"fingerprint": "1wreslj5lfjg9ar99kltzkmh8c7j0c8e7f6rw3g",
+"buttonType" : "offer",
+"buttonLabel": "Make offer",
+"fallbackButtonLabel": ""
+}'
+    ></button>
+
+    <span
+      class="iframe_thumbnail_span"
+      data-config='{
+      "fingerprint": "1wreslj5lfjg9ar99kltzkmh8c7j0c8e7f6rw3g",
+      "size" : "md"
+    }'
+    ></span>
+
+    <span
+      class="iframe_price_span"
+      data-config='{
+  "fingerprint": "1wreslj5lfjg9ar99kltzkmh8c7j0c8e7f6rw3g",
+  "priceFallback": "Not for sale"
+}'
+    ></span>
+
     <div
-      id="iframe_list_div"
+      class="iframe_graph_div"
+      data-config='{
+  "policyId" : "pavia",
+  "showVolume" : true,
+  "showAvgPrice" : false,
+  "showPriceRange" : false,
+  "showListings" : true
+}'
+    ></div>
+    <div
+      class="iframe_list_div"
       data-config='{
       "policyId" : "omen"
     }'
     ></div>
 
-    <!-- <iframe
-      src="http://localhost:3000/iframe/collectionList/da286f15e0de865e3d50fec6fa0484d7e2309671dc4ba8ce6bdd122b?theme=dark&dw=list&pn=&ls=30px&lu=&nfs=14px&a="
-      class="job_iframe"
-    /> -->
-
-    <!-- <button
-      class="jamonbread job_collectionInfo_button"
-      data-config='{
-    "policyid": "pavia",
-    "buttonLabel": "Make collection offer",
-    "buttonType": "collectionOffer"
-  }'
-    ></button> -->
-
-    <!-- <button
-      style="display: none"
-      class="jamonbread"
-      data-config='{
-      "policyid": "1fcf4baf8e7465504e115dcea4db6da1f7bed335f2a672e44ec3f94e"
-    }'
-    /> -->
-
     <script>
       const jamConfig = {
         affilCode: "seeses",
-        theme: "dark",
+        theme: "light",
         logoUrl: "https://www.smashingmagazine.com/images/logo.svg",
         logoSize: "30px",
         projectName: "",
         nameFontSize: "14px",
         showPopup: true,
         wallet: "",
+        defaultTimeFrame: "30d",
         alwaysDisplayButton: true,
       };
     </script>

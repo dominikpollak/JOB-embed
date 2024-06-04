@@ -687,6 +687,94 @@ const fetchNftListing = async (policyId, assetNameHex) => {
   return data;
 };
 
+const generateImgUrl = (assetFingerprint, size) => {
+  return (
+    assetFingerprint[!assetFingerprint.startsWith("asset1") ? 1 : 6] +
+    "/" +
+    assetFingerprint[!assetFingerprint.startsWith("asset1") ? 7 : 12] +
+    "/" +
+    assetFingerprint[!assetFingerprint.startsWith("asset1") ? 12 : 17] +
+    "/" +
+    assetFingerprint[!assetFingerprint.startsWith("asset1") ? 20 : 25] +
+    "/" +
+    assetFingerprint[!assetFingerprint.startsWith("asset1") ? 22 : 27] +
+    "/" +
+    assetFingerprint[!assetFingerprint.startsWith("asset1") ? 26 : 31] +
+    "/" +
+    `${assetFingerprint.startsWith("asset1") ? "" : "asset"}` +
+    assetFingerprint +
+    "/" +
+    size
+  );
+};
+
+const renderAssetElements = (price, fingerprint) => {
+  const priceSpans = document.getElementsByClassName("iframe_price_span");
+  const thumbnailSpans = document.getElementsByClassName(
+    "iframe_thumbnail_span"
+  );
+
+  if (priceSpans.length > 0) {
+    for (let i = 0; i < priceSpans.length; i++) {
+      const priceConfig = JSON.parse(priceSpans[i].dataset.config);
+
+      if (fingerprint !== priceConfig.fingerprint) continue;
+
+      const priceAnchor = document.createElement("a");
+      priceAnchor.href = `https://jamonbread.io/asset/${priceConfig.fingerprint}`;
+      priceAnchor.target = "_blank";
+      priceAnchor.rel = "noopener noreferrer";
+      priceAnchor.className = "job_element_price";
+      priceSpans[i].appendChild(priceAnchor);
+
+      if (price) {
+        priceAnchor.innerHTML = `${"₳ " + price / 1000000}`;
+      } else if (priceConfig.priceFallback) {
+        priceAnchor.innerHTML = `${priceConfig.priceFallback}`;
+      }
+    }
+  }
+
+  if (thumbnailSpans.length > 0) {
+    for (let i = 0; i < thumbnailSpans.length; i++) {
+      const thumbnailConfig = JSON.parse(thumbnailSpans[i].dataset.config);
+
+      if (fingerprint !== thumbnailConfig.fingerprint) continue;
+
+      const thumbnailAnchor = document.createElement("a");
+      thumbnailAnchor.href = `https://jamonbread.io/asset/${thumbnailConfig.fingerprint}`;
+      thumbnailAnchor.target = "_blank";
+      thumbnailAnchor.rel = "noopener noreferrer";
+      thumbnailAnchor.className = "job_element_thumbnail";
+      thumbnailSpans[i].appendChild(thumbnailAnchor);
+
+      const thumbnailImage = document.createElement("img");
+      thumbnailImage.src = `https://p-i.jamonbread.io/${generateImgUrl(
+        thumbnailConfig.fingerprint,
+        thumbnailConfig.size || "md"
+      )}`;
+      thumbnailImage.className = "job_element_thumbnail";
+      thumbnailAnchor.appendChild(thumbnailImage);
+    }
+  }
+};
+
+const renderGraphs = () => {
+  const iframeGraphDivs = document.getElementsByClassName("iframe_graph_div");
+  // localhost:3000/iframe/CollectionGraph?pi=omen&theme=dimmed
+
+  if (iframeGraphDivs.length > 0) {
+    for (let i = 0; i < iframeGraphDivs.length; i++) {
+      const iframeConfig = JSON.parse(iframeGraphDivs[i].dataset.config);
+      const graphIframe = document.createElement("iframe");
+      graphIframe.src = `http://localhost:3000/iframe/collectionGraph?pi=${iframeConfig.policyId}&theme=${jamConfig.theme}&tf=${jamConfig.defaultTimeFrame}&sv=${iframeConfig.showVolume}&sap=${iframeConfig.showAvgPrice}&spr=${iframeConfig.showPriceRange}&sl=${iframeConfig.showListings}&a=${jamConfig.affilCode}`;
+      graphIframe.className = "job_graph_iframe";
+      graphIframe.scrolling = "no";
+      iframeGraphDivs[i].appendChild(graphIframe);
+    }
+  }
+};
+
 const translateFingerprint = async (fingerprint) => {
   const res = await fetch(
     "https://explorer-mainnet-prod.jamonbread.tech/api/v2/nft/assetByFingerprint",
@@ -704,19 +792,29 @@ const translateFingerprint = async (fingerprint) => {
   return data;
 };
 
+console.log("jamConfig", jamConfig);
+
+if (!jamConfig) {
+  throw new Error("jamConfig is not defined");
+}
+
 const url = jamConfig.testnet
   ? "https://testnet-stage.jamonbread.tech/iframe"
   : "https://jamonbread.io/iframe";
 
 const btn = document.getElementsByClassName("jamonbread");
-const iframeDiv = document.getElementById("iframe_list_div");
+const iframeListDivs = document.getElementsByClassName("iframe_list_div");
 
-if (iframeDiv) {
-  const iframeConfig = JSON.parse(iframeDiv.dataset.config);
-  const listIframe = document.createElement("iframe");
-  listIframe.src = `${url}/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
-  listIframe.className = "job_list_iframe";
-  iframeDiv.appendChild(listIframe);
+renderGraphs();
+
+if (iframeListDivs.length > 0) {
+  for (let i = 0; i < iframeListDivs.length; i++) {
+    const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
+    const listIframe = document.createElement("iframe");
+    listIframe.src = `${url}/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
+    listIframe.className = "job_list_iframe";
+    iframeListDivs[i].appendChild(listIframe);
+  }
 }
 
 for (let i = 0; i < btn.length; i++) {
@@ -740,6 +838,11 @@ for (let i = 0; i < btn.length; i++) {
       const res = await fetchNftListing(
         fingerprintRes.policyId,
         fingerprintRes.assetName
+      );
+
+      renderAssetElements(
+        res.sellOrder ? res.sellOrder.price : 0,
+        config.fingerprint
       );
 
       // If user doesn't own the asset, don't show the list button

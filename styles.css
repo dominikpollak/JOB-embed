@@ -60,3 +60,30 @@
   width: 100%;
   height: 800px;
 }
+
+.job_element_thumbnail {
+  padding: 5px;
+  border: none;
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+}
+.job_element_price {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.job_graph_iframe {
+  border: 2px solid #ff0000;
+  width: 50%;
+  height: 480px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,19 +1,31 @@
 import { fetchNftListing } from "../utils/fetchNftListing.js";
+import { renderAssetElements } from "../utils/renderAssetElements.js";
+import { renderGraphs } from "../utils/renderGraphs.js";
 import { translateFingerprint } from "../utils/translateFingerprint.js";
+
+console.log("jamConfig", jamConfig);
+
+if (!jamConfig) {
+  throw new Error("jamConfig is not defined");
+}
 
 const url = jamConfig.testnet
   ? "https://testnet-stage.jamonbread.tech/iframe"
   : "https://jamonbread.io/iframe";
 
 const btn = document.getElementsByClassName("jamonbread");
-const iframeDiv = document.getElementById("iframe_list_div");
+const iframeListDivs = document.getElementsByClassName("iframe_list_div");
 
-if (iframeDiv) {
-  const iframeConfig = JSON.parse(iframeDiv.dataset.config);
-  const listIframe = document.createElement("iframe");
-  listIframe.src = `${url}/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
-  listIframe.className = "job_list_iframe";
-  iframeDiv.appendChild(listIframe);
+renderGraphs();
+
+if (iframeListDivs.length > 0) {
+  for (let i = 0; i < iframeListDivs.length; i++) {
+    const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
+    const listIframe = document.createElement("iframe");
+    listIframe.src = `${url}/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
+    listIframe.className = "job_list_iframe";
+    iframeListDivs[i].appendChild(listIframe);
+  }
 }
 
 for (let i = 0; i < btn.length; i++) {
@@ -37,6 +49,11 @@ for (let i = 0; i < btn.length; i++) {
       const res = await fetchNftListing(
         fingerprintRes.policyId,
         fingerprintRes.assetName
+      );
+
+      renderAssetElements(
+        res.sellOrder ? res.sellOrder.price : 0,
+        config.fingerprint
       );
 
       // If user doesn't own the asset, don't show the list button
