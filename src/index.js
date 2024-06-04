@@ -2,8 +2,6 @@ import { fetchNftListing } from "../utils/fetchNftListing.js";
 import { renderAssetElements } from "../utils/renderAssetElements.js";
 import { renderGraphs } from "../utils/renderGraphs.js";
 import { translateFingerprint } from "../utils/translateFingerprint.js";
-
-console.log("test");
 const jamConfig = window.jamConfig;
 console.log("jamConfig", jamConfig);
 
@@ -17,6 +15,7 @@ const url = jamConfig.testnet
 
 const btn = document.getElementsByClassName("jamonbread");
 const iframeListDivs = document.getElementsByClassName("iframe_list_div");
+console.log(iframeListDivs);
 
 renderGraphs();
 
