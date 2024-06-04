@@ -150,7 +150,6 @@
             return result;
           }
 
-          // Translate null to an empty string so that it doesn't serialize as 'null'
           value = value === null ? "" : value;
 
           if (result.length === 0) {
