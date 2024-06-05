@@ -1,25 +1,6 @@
-.job_asset_offer_button {
+.job_asset_buy_button {
   display: none;
-  border-radius: 0;
-  border-width: 1px;
-  border-color: #ffffff;
-  border-style: solid;
-  color: #ffffff;
-  background-color: #ff0000;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
-  box-shadow: none;
-}
-
-.job_asset_fallback_button {
-  display: inline-block;
-  border-radius: 0;
+  border-radius: 0px;
   border-width: 1px;
   border-color: #ffffff;
   border-style: solid;
@@ -35,55 +16,46 @@
   outline: none;
   box-shadow: none;
 }
-
-.job_collectionInfo_button {
-  display: block;
-  border-radius: 0;
-  border-width: 1px;
-  border-color: #ffffff;
-  border-style: solid;
-  color: #ffffff;
-  background-color: #ff0000;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
-  box-shadow: none;
-}
-
-.job_list_iframe {
-  border: 2px solid #ea2323;
-  width: 100%;
-  height: 800px;
-}
-
 .job_element_thumbnail {
   padding: 5px;
   border: none;
   width: 150px;
   height: 150px;
-  border-radius: 20px;
 }
 .job_element_price {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 5px;
   text-decoration: none;
 }
 
-.job_graph_iframe {
-  border: 2px solid #ff0000;
-  width: 50%;
-  height: 480px;
+.job_list_iframe {
+  border: 10px solid #00ff1e;
+  width: 100%;
+  height: 500px;
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.job_collectionInfo_button {
+  display: inline-block;
+  border-radius: 0px;
+  border-width: 1px;
+  border-color: #ffffff;
+  border-style: solid;
+  color: #000000;
+  background-color: #f08989;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
+
+.job_graph_iframe {
+  border: 2px solid #000000;
+  width: 100%;
+  height: 480px;
 }

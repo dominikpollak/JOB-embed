@@ -3,7 +3,6 @@ import { renderAssetElements } from "../utils/renderAssetElements.js";
 import { renderGraphs } from "../utils/renderGraphs.js";
 import { translateFingerprint } from "../utils/translateFingerprint.js";
 const jamConfig = window.jamConfig;
-console.log("jamConfig", jamConfig);
 
 if (!jamConfig) {
   throw new Error("jamConfig is not defined");
@@ -11,13 +10,13 @@ if (!jamConfig) {
 
 const url = jamConfig.testnet
   ? "https://testnet-stage.jamonbread.tech/iframe"
-  : "https://jamonbread.io/iframe";
+  : // : "https://jamonbread.io/iframe";
+    "http://localhost:3000/iframe";
 
 const btn = document.getElementsByClassName("jamonbread");
 const iframeListDivs = document.getElementsByClassName("iframe_list_div");
-console.log(iframeListDivs);
 
-renderGraphs();
+renderGraphs(url);
 
 if (iframeListDivs.length > 0) {
   for (let i = 0; i < iframeListDivs.length; i++) {
