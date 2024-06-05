@@ -1,6 +1,6 @@
 import { generateImgUrl } from "./generateImgUrl";
 
-export const renderAssetElements = (price, fingerprint) => {
+export const renderAssetElements = (url, price, fingerprint) => {
   const priceSpans = document.getElementsByClassName("iframe_price_span");
   const thumbnailSpans = document.getElementsByClassName(
     "iframe_thumbnail_span"
@@ -13,7 +13,7 @@ export const renderAssetElements = (price, fingerprint) => {
       if (fingerprint !== priceConfig.fingerprint) continue;
 
       const priceAnchor = document.createElement("a");
-      priceAnchor.href = `https://jamonbread.io/asset/${priceConfig.fingerprint}`;
+      priceAnchor.href = `${url}/asset/${priceConfig.fingerprint}`;
       priceAnchor.target = "_blank";
       priceAnchor.rel = "noopener noreferrer";
       priceAnchor.className = "job_element_price";
@@ -34,7 +34,7 @@ export const renderAssetElements = (price, fingerprint) => {
       if (fingerprint !== thumbnailConfig.fingerprint) continue;
 
       const thumbnailAnchor = document.createElement("a");
-      thumbnailAnchor.href = `https://jamonbread.io/asset/${thumbnailConfig.fingerprint}`;
+      thumbnailAnchor.href = `${url}/asset/${thumbnailConfig.fingerprint}`;
       thumbnailAnchor.target = "_blank";
       thumbnailAnchor.rel = "noopener noreferrer";
       thumbnailAnchor.className = "job_element_thumbnail";

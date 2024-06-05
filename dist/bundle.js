@@ -620,7 +620,7 @@ const generateImgUrl = (assetFingerprint, size) => {
   );
 };
 
-const renderAssetElements = (price, fingerprint) => {
+const renderAssetElements = (url, price, fingerprint) => {
   const priceSpans = document.getElementsByClassName("iframe_price_span");
   const thumbnailSpans = document.getElementsByClassName(
     "iframe_thumbnail_span"
@@ -633,7 +633,7 @@ const renderAssetElements = (price, fingerprint) => {
       if (fingerprint !== priceConfig.fingerprint) continue;
 
       const priceAnchor = document.createElement("a");
-      priceAnchor.href = `https://jamonbread.io/asset/${priceConfig.fingerprint}`;
+      priceAnchor.href = `${url}/asset/${priceConfig.fingerprint}`;
       priceAnchor.target = "_blank";
       priceAnchor.rel = "noopener noreferrer";
       priceAnchor.className = "job_element_price";
@@ -654,7 +654,7 @@ const renderAssetElements = (price, fingerprint) => {
       if (fingerprint !== thumbnailConfig.fingerprint) continue;
 
       const thumbnailAnchor = document.createElement("a");
-      thumbnailAnchor.href = `https://jamonbread.io/asset/${thumbnailConfig.fingerprint}`;
+      thumbnailAnchor.href = `${url}/asset/${thumbnailConfig.fingerprint}`;
       thumbnailAnchor.target = "_blank";
       thumbnailAnchor.rel = "noopener noreferrer";
       thumbnailAnchor.className = "job_element_thumbnail";
@@ -673,13 +673,12 @@ const renderAssetElements = (price, fingerprint) => {
 
 const renderGraphs = (url) => {
   const iframeGraphDivs = document.getElementsByClassName("iframe_graph_div");
-  // localhost:3000/iframe/CollectionGraph?pi=omen&theme=dimmed
 
   if (iframeGraphDivs.length > 0) {
     for (let i = 0; i < iframeGraphDivs.length; i++) {
       const iframeConfig = JSON.parse(iframeGraphDivs[i].dataset.config);
       const graphIframe = document.createElement("iframe");
-      graphIframe.src = `${url}/collectionGraph?pi=${iframeConfig.policyId}&theme=${jamConfig.theme}&tf=${jamConfig.defaultTimeFrame}&sv=${iframeConfig.showVolume}&sap=${iframeConfig.showAvgPrice}&spr=${iframeConfig.showPriceRange}&sl=${iframeConfig.showListings}&a=${jamConfig.affilCode}`;
+      graphIframe.src = `${url}/iframe/collectionGraph?pi=${iframeConfig.policyId}&theme=${jamConfig.theme}&tf=${jamConfig.defaultTimeFrame}&sv=${iframeConfig.showVolume}&sap=${iframeConfig.showAvgPrice}&spr=${iframeConfig.showPriceRange}&sl=${iframeConfig.showListings}&a=${jamConfig.affilCode}`;
       graphIframe.className = "job_graph_iframe";
       graphIframe.scrolling = "no";
       iframeGraphDivs[i].appendChild(graphIframe);
@@ -711,9 +710,8 @@ if (!jamConfig$1) {
 }
 
 const url = jamConfig$1.testnet
-  ? "https://testnet-stage.jamonbread.tech/iframe"
-  : // : "https://jamonbread.io/iframe";
-    "http://localhost:3000/iframe";
+  ? "https://testnet-stage.jamonbread.tech"
+  : "https://jamonbread.io";
 
 const btn = document.getElementsByClassName("jamonbread");
 const iframeListDivs = document.getElementsByClassName("iframe_list_div");
@@ -724,7 +722,7 @@ if (iframeListDivs.length > 0) {
   for (let i = 0; i < iframeListDivs.length; i++) {
     const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
     const listIframe = document.createElement("iframe");
-    listIframe.src = `${url}/collectionList/${iframeConfig.policyId}?theme=${jamConfig$1.theme}&lu=${jamConfig$1.logoUrl}&ls=${jamConfig$1.logoSize}&pn=${jamConfig$1.projectName}&nfs=${jamConfig$1.nameFontSize}&dv=${jamConfig$1.defaultView}&a=${jamConfig$1.affilCode}`;
+    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jamConfig$1.theme}&lu=${jamConfig$1.logoUrl}&ls=${jamConfig$1.logoSize}&pn=${jamConfig$1.projectName}&nfs=${jamConfig$1.nameFontSize}&dv=${jamConfig$1.defaultView}&a=${jamConfig$1.affilCode}`;
     listIframe.className = "job_list_iframe";
     iframeListDivs[i].appendChild(listIframe);
   }
@@ -796,7 +794,7 @@ for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", async (e) => {
     let iframeSrc = "";
     if (btn[i].classList.contains("job_collectionInfo_button")) {
-      iframeSrc = `${url}/collectionOffer/${config.policyid}?theme=${jamConfig$1.theme}&showPopup=${jamConfig$1.showPopup}&a=${jamConfig$1.affilCode}`;
+      iframeSrc = `${url}/iframe/collectionOffer/${config.policyid}?theme=${jamConfig$1.theme}&showPopup=${jamConfig$1.showPopup}&a=${jamConfig$1.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
@@ -806,7 +804,7 @@ for (let i = 0; i < btn.length; i++) {
       btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
       btn[i].classList.contains("job_asset_fallback_button")
     ) {
-      iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig$1.theme}&type=${config.buttonType}&showPopup=${jamConfig$1.showPopup}&a=${jamConfig$1.affilCode}`;
+      iframeSrc = `${url}/iframe/asset/${config.fingerprint}?theme=${jamConfig$1.theme}&type=${config.buttonType}&showPopup=${jamConfig$1.showPopup}&a=${jamConfig$1.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",

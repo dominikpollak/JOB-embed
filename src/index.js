@@ -9,9 +9,8 @@ if (!jamConfig) {
 }
 
 const url = jamConfig.testnet
-  ? "https://testnet-stage.jamonbread.tech/iframe"
-  : // : "https://jamonbread.io/iframe";
-    "http://localhost:3000/iframe";
+  ? "https://testnet-stage.jamonbread.tech"
+  : "https://jamonbread.io";
 
 const btn = document.getElementsByClassName("jamonbread");
 const iframeListDivs = document.getElementsByClassName("iframe_list_div");
@@ -22,7 +21,7 @@ if (iframeListDivs.length > 0) {
   for (let i = 0; i < iframeListDivs.length; i++) {
     const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
     const listIframe = document.createElement("iframe");
-    listIframe.src = `${url}/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
+    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
     listIframe.className = "job_list_iframe";
     iframeListDivs[i].appendChild(listIframe);
   }
@@ -94,7 +93,7 @@ for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", async (e) => {
     let iframeSrc = "";
     if (btn[i].classList.contains("job_collectionInfo_button")) {
-      iframeSrc = `${url}/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
+      iframeSrc = `${url}/iframe/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
@@ -104,7 +103,7 @@ for (let i = 0; i < btn.length; i++) {
       btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
       btn[i].classList.contains("job_asset_fallback_button")
     ) {
-      iframeSrc = `${url}/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
+      iframeSrc = `${url}/iframe/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
