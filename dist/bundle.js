@@ -770,7 +770,7 @@
 
   // bundle.js must be wrapped in an IIFE after every build to avoid polluting the global scope
 
-  const jamConfig$1 = window.jamConfig;
+  const jamConfig$1 = jamConfig$1 || window.jamConfig;
 
   if (!jamConfig$1) {
     throw new Error("jamConfig is not defined");

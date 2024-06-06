@@ -5,7 +5,7 @@ import { translateFingerprint } from "../utils/translateFingerprint.js";
 
 // bundle.js must be wrapped in an IIFE after every build to avoid polluting the global scope
 
-const jamConfig = window.jamConfig;
+const jamConfig = jamConfig || window.jamConfig;
 
 if (!jamConfig) {
   throw new Error("jamConfig is not defined");
