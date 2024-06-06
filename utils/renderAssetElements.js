@@ -20,7 +20,7 @@ export const renderAssetElements = (url, price, fingerprint) => {
       priceSpans[i].appendChild(priceAnchor);
 
       if (price) {
-        priceAnchor.innerHTML = `${"₳ " + price / 1000000}`;
+        priceAnchor.innerHTML = `${"\u20B3 " + price / 1000000}`;
       } else if (priceConfig.priceFallback) {
         priceAnchor.innerHTML = `${priceConfig.priceFallback}`;
       }
