@@ -810,56 +810,55 @@
         config.buttonType === "list")
     ) {
       (async () => {
-        const fp = config.fingerprint.includes("asset")
-          ? config.fingerprint
-          : `asset${config.fingerprint}`;
-        const fingerprintRes = await translateFingerprint(fp);
-
-        const res = await fetchNftListing(
-          fingerprintRes.policyId,
-          fingerprintRes.assetName
-        );
-
         if (!processedFingerprints.has(config.fingerprint)) {
+          processedFingerprints.add(config.fingerprint);
+          const fp = config.fingerprint.includes("asset")
+            ? config.fingerprint
+            : `asset${config.fingerprint}`;
+          const fingerprintRes = await translateFingerprint(fp);
+
+          const res = await fetchNftListing(
+            fingerprintRes.policyId,
+            fingerprintRes.assetName
+          );
+
           renderAssetElements(
             url,
             res.sellOrder ? res.sellOrder.price : 0,
             config.fingerprint
           );
-        }
 
-        processedFingerprints.add(config.fingerprint);
+          // If user doesn't own the asset, don't show the list button
+          if (
+            res.owner.address &&
+            res.owner.address !== jamConfig$1.wallet &&
+            config.buttonType === "list"
+          ) {
+            return;
+          }
 
-        // If user doesn't own the asset, don't show the list button
-        if (
-          res.owner.address &&
-          res.owner.address !== jamConfig$1.wallet &&
-          config.buttonType === "list"
-        ) {
-          return;
-        }
+          // If user is listed by the user, don't show the buy button
+          if (
+            res.sellOrder &&
+            res.sellOrder.listedByAddress === jamConfig$1.wallet &&
+            config.buttonType === "buy"
+          ) {
+            return;
+          }
 
-        // If user is listed by the user, don't show the buy button
-        if (
-          res.sellOrder &&
-          res.sellOrder.listedByAddress === jamConfig$1.wallet &&
-          config.buttonType === "buy"
-        ) {
-          return;
-        }
-
-        if (!res.sellOrder && config.buttonType === "buy") {
-          if (config.fallbackButtonLabel) {
-            btn[i].innerHTML = config.fallbackButtonLabel;
-            btn[i].classList.remove("job_asset_buy_button");
-            btn[i].classList.add("job_asset_fallback_button");
-          } else if (jamConfig$1.alwaysDisplayButton) {
+          if (!res.sellOrder && config.buttonType === "buy") {
+            if (config.fallbackButtonLabel) {
+              btn[i].innerHTML = config.fallbackButtonLabel;
+              btn[i].classList.remove("job_asset_buy_button");
+              btn[i].classList.add("job_asset_fallback_button");
+            } else if (jamConfig$1.alwaysDisplayButton) {
+              btn[i].innerHTML = config.buttonLabel;
+              btn[i].style.display = "inline-block";
+            }
+          } else {
             btn[i].innerHTML = config.buttonLabel;
             btn[i].style.display = "inline-block";
           }
-        } else {
-          btn[i].innerHTML = config.buttonLabel;
-          btn[i].style.display = "inline-block";
         }
       })();
     }
