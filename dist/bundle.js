@@ -768,6 +768,8 @@
     return data;
   };
 
+  // bundle.js must be wrapped in an IIFE after every build to avoid polluting the global scope
+
   const jamConfig$1 = window.jamConfig;
 
   if (!jamConfig$1) {
@@ -793,6 +795,8 @@
     }
   }
 
+  const processedFingerprints = new Set();
+
   for (let i = 0; i < btn.length; i++) {
     const config = JSON.parse(btn[i].dataset.config);
 
@@ -816,11 +820,15 @@
           fingerprintRes.assetName
         );
 
-        renderAssetElements(
-          url,
-          res.sellOrder ? res.sellOrder.price : 0,
-          config.fingerprint
-        );
+        if (!processedFingerprints.has(config.fingerprint)) {
+          renderAssetElements(
+            url,
+            res.sellOrder ? res.sellOrder.price : 0,
+            config.fingerprint
+          );
+        }
+
+        processedFingerprints.add(config.fingerprint);
 
         // If user doesn't own the asset, don't show the list button
         if (

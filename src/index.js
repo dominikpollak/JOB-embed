@@ -3,6 +3,8 @@ import { renderAssetElements } from "../utils/renderAssetElements.js";
 import { renderGraphs } from "../utils/renderGraphs.js";
 import { translateFingerprint } from "../utils/translateFingerprint.js";
 
+// bundle.js must be wrapped in an IIFE after every build to avoid polluting the global scope
+
 const jamConfig = window.jamConfig;
 
 if (!jamConfig) {
@@ -28,6 +30,8 @@ if (iframeListDivs.length > 0) {
   }
 }
 
+const processedFingerprints = new Set();
+
 for (let i = 0; i < btn.length; i++) {
   const config = JSON.parse(btn[i].dataset.config);
 
@@ -51,11 +55,15 @@ for (let i = 0; i < btn.length; i++) {
         fingerprintRes.assetName
       );
 
-      renderAssetElements(
-        url,
-        res.sellOrder ? res.sellOrder.price : 0,
-        config.fingerprint
-      );
+      if (!processedFingerprints.has(config.fingerprint)) {
+        renderAssetElements(
+          url,
+          res.sellOrder ? res.sellOrder.price : 0,
+          config.fingerprint
+        );
+      }
+
+      processedFingerprints.add(config.fingerprint);
 
       // If user doesn't own the asset, don't show the list button
       if (
