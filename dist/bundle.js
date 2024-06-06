@@ -770,13 +770,13 @@
 
   // bundle.js must be wrapped in an IIFE after every build to avoid polluting the global scope
 
-  const jamConfig$1 = jamConfig$1 || window.jamConfig;
+  const jobConfig = jamConfig || window.jamConfig;
 
-  if (!jamConfig$1) {
+  if (!jobConfig) {
     throw new Error("jamConfig is not defined");
   }
 
-  const url = jamConfig$1.testnet
+  const url = jobConfig.testnet
     ? "https://testnet-stage.jamonbread.tech"
     : "https://jamonbread.io";
 
@@ -789,7 +789,7 @@
     for (let i = 0; i < iframeListDivs.length; i++) {
       const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
       const listIframe = document.createElement("iframe");
-      listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jamConfig$1.theme}&lu=${jamConfig$1.logoUrl}&ls=${jamConfig$1.logoSize}&pn=${jamConfig$1.projectName}&nfs=${jamConfig$1.nameFontSize}&dv=${jamConfig$1.defaultView}&a=${jamConfig$1.affilCode}`;
+      listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
       listIframe.className = "job_list_iframe";
       iframeListDivs[i].appendChild(listIframe);
     }
@@ -831,7 +831,7 @@
           // If user doesn't own the asset, don't show the list button
           if (
             res.owner.address &&
-            res.owner.address !== jamConfig$1.wallet &&
+            res.owner.address !== jobConfig.wallet &&
             config.buttonType === "list"
           ) {
             return;
@@ -840,7 +840,7 @@
           // If user is listed by the user, don't show the buy button
           if (
             res.sellOrder &&
-            res.sellOrder.listedByAddress === jamConfig$1.wallet &&
+            res.sellOrder.listedByAddress === jobConfig.wallet &&
             config.buttonType === "buy"
           ) {
             return;
@@ -851,7 +851,7 @@
               btn[i].innerHTML = config.fallbackButtonLabel;
               btn[i].classList.remove("job_asset_buy_button");
               btn[i].classList.add("job_asset_fallback_button");
-            } else if (jamConfig$1.alwaysDisplayButton) {
+            } else if (jobConfig.alwaysDisplayButton) {
               btn[i].innerHTML = config.buttonLabel;
               btn[i].style.display = "inline-block";
             }
@@ -867,7 +867,7 @@
     btn[i].addEventListener("click", async (e) => {
       let iframeSrc = "";
       if (btn[i].classList.contains("job_collectionInfo_button")) {
-        iframeSrc = `${url}/iframe/collectionOffer/${config.policyid}?theme=${jamConfig$1.theme}&showPopup=${jamConfig$1.showPopup}&a=${jamConfig$1.affilCode}`;
+        iframeSrc = `${url}/iframe/collectionOffer/${config.policyid}?theme=${jobConfig.theme}&showPopup=${jobConfig.showPopup}&a=${jobConfig.affilCode}`;
         newWindow = window.open(
           iframeSrc,
           "_blank",
@@ -877,7 +877,7 @@
         btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
         btn[i].classList.contains("job_asset_fallback_button")
       ) {
-        iframeSrc = `${url}/iframe/asset/${config.fingerprint}?theme=${jamConfig$1.theme}&type=${config.buttonType}&showPopup=${jamConfig$1.showPopup}&a=${jamConfig$1.affilCode}`;
+        iframeSrc = `${url}/iframe/asset/${config.fingerprint}?theme=${jobConfig.theme}&type=${config.buttonType}&showPopup=${jobConfig.showPopup}&a=${jobConfig.affilCode}`;
         newWindow = window.open(
           iframeSrc,
           "_blank",
@@ -890,10 +890,10 @@
           {
             id: "job_frame",
             data: {
-              logoUrl: jamConfig$1.logoUrl,
-              logoSize: jamConfig$1.logoSize,
-              projectName: jamConfig$1.projectName,
-              nameFontSize: jamConfig$1.nameFontSize,
+              logoUrl: jobConfig.logoUrl,
+              logoSize: jobConfig.logoSize,
+              projectName: jobConfig.projectName,
+              nameFontSize: jobConfig.nameFontSize,
             },
           },
           "*"

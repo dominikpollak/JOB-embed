@@ -5,13 +5,13 @@ import { translateFingerprint } from "../utils/translateFingerprint.js";
 
 // bundle.js must be wrapped in an IIFE after every build to avoid polluting the global scope
 
-const jamConfig = jamConfig || window.jamConfig;
+const jobConfig = jamConfig || window.jamConfig;
 
-if (!jamConfig) {
+if (!jobConfig) {
   throw new Error("jamConfig is not defined");
 }
 
-const url = jamConfig.testnet
+const url = jobConfig.testnet
   ? "https://testnet-stage.jamonbread.tech"
   : "https://jamonbread.io";
 
@@ -24,7 +24,7 @@ if (iframeListDivs.length > 0) {
   for (let i = 0; i < iframeListDivs.length; i++) {
     const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
     const listIframe = document.createElement("iframe");
-    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jamConfig.theme}&lu=${jamConfig.logoUrl}&ls=${jamConfig.logoSize}&pn=${jamConfig.projectName}&nfs=${jamConfig.nameFontSize}&dv=${jamConfig.defaultView}&a=${jamConfig.affilCode}`;
+    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
     listIframe.className = "job_list_iframe";
     iframeListDivs[i].appendChild(listIframe);
   }
@@ -66,7 +66,7 @@ for (let i = 0; i < btn.length; i++) {
         // If user doesn't own the asset, don't show the list button
         if (
           res.owner.address &&
-          res.owner.address !== jamConfig.wallet &&
+          res.owner.address !== jobConfig.wallet &&
           config.buttonType === "list"
         ) {
           return;
@@ -75,7 +75,7 @@ for (let i = 0; i < btn.length; i++) {
         // If user is listed by the user, don't show the buy button
         if (
           res.sellOrder &&
-          res.sellOrder.listedByAddress === jamConfig.wallet &&
+          res.sellOrder.listedByAddress === jobConfig.wallet &&
           config.buttonType === "buy"
         ) {
           return;
@@ -86,7 +86,7 @@ for (let i = 0; i < btn.length; i++) {
             btn[i].innerHTML = config.fallbackButtonLabel;
             btn[i].classList.remove("job_asset_buy_button");
             btn[i].classList.add("job_asset_fallback_button");
-          } else if (jamConfig.alwaysDisplayButton) {
+          } else if (jobConfig.alwaysDisplayButton) {
             btn[i].innerHTML = config.buttonLabel;
             btn[i].style.display = "inline-block";
           }
@@ -102,7 +102,7 @@ for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", async (e) => {
     let iframeSrc = "";
     if (btn[i].classList.contains("job_collectionInfo_button")) {
-      iframeSrc = `${url}/iframe/collectionOffer/${config.policyid}?theme=${jamConfig.theme}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
+      iframeSrc = `${url}/iframe/collectionOffer/${config.policyid}?theme=${jobConfig.theme}&showPopup=${jobConfig.showPopup}&a=${jobConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
@@ -112,7 +112,7 @@ for (let i = 0; i < btn.length; i++) {
       btn[i].classList.contains(`job_asset_${config.buttonType}_button`) ||
       btn[i].classList.contains("job_asset_fallback_button")
     ) {
-      iframeSrc = `${url}/iframe/asset/${config.fingerprint}?theme=${jamConfig.theme}&type=${config.buttonType}&showPopup=${jamConfig.showPopup}&a=${jamConfig.affilCode}`;
+      iframeSrc = `${url}/iframe/asset/${config.fingerprint}?theme=${jobConfig.theme}&type=${config.buttonType}&showPopup=${jobConfig.showPopup}&a=${jobConfig.affilCode}`;
       newWindow = window.open(
         iframeSrc,
         "_blank",
@@ -125,10 +125,10 @@ for (let i = 0; i < btn.length; i++) {
         {
           id: "job_frame",
           data: {
-            logoUrl: jamConfig.logoUrl,
-            logoSize: jamConfig.logoSize,
-            projectName: jamConfig.projectName,
-            nameFontSize: jamConfig.nameFontSize,
+            logoUrl: jobConfig.logoUrl,
+            logoSize: jobConfig.logoSize,
+            projectName: jobConfig.projectName,
+            nameFontSize: jobConfig.nameFontSize,
           },
         },
         "*"
