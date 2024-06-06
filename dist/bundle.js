@@ -782,8 +782,17 @@
 
   const btn = document.getElementsByClassName("jamonbread");
   const iframeListDivs = document.getElementsByClassName("iframe_list_div");
+  const iframeListDiv = document.getElementById("iframe_list_div");
 
   renderGraphs(url);
+
+  if (iframeListDiv) {
+    const iframeConfig = JSON.parse(iframeListDiv.dataset.config);
+    const listIframe = document.createElement("iframe");
+    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
+    listIframe.className = "job_list_iframe";
+    iframeListDiv.appendChild(listIframe);
+  }
 
   if (iframeListDivs.length > 0) {
     for (let i = 0; i < iframeListDivs.length; i++) {
