@@ -741,28 +741,12 @@
 
     if (iframeGraphDivs.length > 0) {
       for (let i = 0; i < iframeGraphDivs.length; i++) {
-        iframeGraphDivs[i].style.position = "relative";
         const iframeConfig = JSON.parse(iframeGraphDivs[i].dataset.config);
-        const graphAnchor = document.createElement("a");
-        graphAnchor.href = `${url}/collections/${iframeConfig.policyId}`;
-        graphAnchor.target = "_blank";
-        graphAnchor.rel = "noopener noreferrer";
-        iframeGraphDivs[i].appendChild(graphAnchor);
         const graphIframe = document.createElement("iframe");
         graphIframe.src = `${url}/iframe/collectionGraph?pi=${iframeConfig.policyId}&theme=${jamConfig.theme}&tf=${jamConfig.defaultTimeFrame}&sv=${iframeConfig.showVolume}&sap=${iframeConfig.showAvgPrice}&spr=${iframeConfig.showPriceRange}&sl=${iframeConfig.showListings}&a=${jamConfig.affilCode}`;
         graphIframe.className = "job_graph_iframe";
         graphIframe.scrolling = "no";
-        graphAnchor.appendChild(graphIframe);
-
-        const overlayDiv = document.createElement("div");
-        overlayDiv.style.position = "absolute";
-        overlayDiv.style.top = "0";
-        overlayDiv.style.left = "0";
-        overlayDiv.style.width = "100%";
-        overlayDiv.style.height = "100%";
-        overlayDiv.style.zIndex = "10";
-        overlayDiv.style.cursor = "pointer";
-        graphAnchor.appendChild(overlayDiv);
+        iframeGraphDivs[i].appendChild(graphIframe);
       }
     }
   };
@@ -821,6 +805,7 @@
   }
 
   const processedFingerprints = new Set();
+  let res = {};
 
   for (let i = 0; i < btn.length; i++) {
     const config = JSON.parse(btn[i].dataset.config);
@@ -842,7 +827,7 @@
             : `asset${config.fingerprint}`;
           const fingerprintRes = await translateFingerprint(fp);
 
-          const res = await fetchNftListing(
+          res = await fetchNftListing(
             fingerprintRes.policyId,
             fingerprintRes.assetName
           );
@@ -861,29 +846,29 @@
           ) {
             return;
           }
+        }
 
-          // If user is listed by the user, don't show the buy button
-          if (
-            res.sellOrder &&
-            res.sellOrder.listedByAddress === jobConfig.wallet &&
-            config.buttonType === "buy"
-          ) {
-            return;
-          }
+        // If user is listed by the user, don't show the buy button
+        if (
+          res.sellOrder &&
+          res.sellOrder.listedByAddress === jobConfig.wallet &&
+          config.buttonType === "buy"
+        ) {
+          return;
+        }
 
-          if (!res.sellOrder && config.buttonType === "buy") {
-            if (config.fallbackButtonLabel) {
-              btn[i].innerHTML = config.fallbackButtonLabel;
-              btn[i].classList.remove("job_asset_buy_button");
-              btn[i].classList.add("job_asset_fallback_button");
-            } else if (jobConfig.alwaysDisplayButton) {
-              btn[i].innerHTML = config.buttonLabel;
-              btn[i].style.display = "inline-block";
-            }
-          } else {
+        if (!res.sellOrder && config.buttonType === "buy") {
+          if (config.fallbackButtonLabel) {
+            btn[i].innerHTML = config.fallbackButtonLabel;
+            btn[i].classList.remove("job_asset_buy_button");
+            btn[i].classList.add("job_asset_fallback_button");
+          } else if (jobConfig.alwaysDisplayButton) {
             btn[i].innerHTML = config.buttonLabel;
             btn[i].style.display = "inline-block";
           }
+        } else {
+          btn[i].innerHTML = config.buttonLabel;
+          btn[i].style.display = "inline-block";
         }
       })();
     }

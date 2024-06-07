@@ -40,6 +40,7 @@ if (iframeListDivs.length > 0) {
 }
 
 const processedFingerprints = new Set();
+let res = {};
 
 for (let i = 0; i < btn.length; i++) {
   const config = JSON.parse(btn[i].dataset.config);
@@ -61,7 +62,7 @@ for (let i = 0; i < btn.length; i++) {
           : `asset${config.fingerprint}`;
         const fingerprintRes = await translateFingerprint(fp);
 
-        const res = await fetchNftListing(
+        res = await fetchNftListing(
           fingerprintRes.policyId,
           fingerprintRes.assetName
         );
@@ -80,29 +81,29 @@ for (let i = 0; i < btn.length; i++) {
         ) {
           return;
         }
+      }
 
-        // If user is listed by the user, don't show the buy button
-        if (
-          res.sellOrder &&
-          res.sellOrder.listedByAddress === jobConfig.wallet &&
-          config.buttonType === "buy"
-        ) {
-          return;
-        }
+      // If user is listed by the user, don't show the buy button
+      if (
+        res.sellOrder &&
+        res.sellOrder.listedByAddress === jobConfig.wallet &&
+        config.buttonType === "buy"
+      ) {
+        return;
+      }
 
-        if (!res.sellOrder && config.buttonType === "buy") {
-          if (config.fallbackButtonLabel) {
-            btn[i].innerHTML = config.fallbackButtonLabel;
-            btn[i].classList.remove("job_asset_buy_button");
-            btn[i].classList.add("job_asset_fallback_button");
-          } else if (jobConfig.alwaysDisplayButton) {
-            btn[i].innerHTML = config.buttonLabel;
-            btn[i].style.display = "inline-block";
-          }
-        } else {
+      if (!res.sellOrder && config.buttonType === "buy") {
+        if (config.fallbackButtonLabel) {
+          btn[i].innerHTML = config.fallbackButtonLabel;
+          btn[i].classList.remove("job_asset_buy_button");
+          btn[i].classList.add("job_asset_fallback_button");
+        } else if (jobConfig.alwaysDisplayButton) {
           btn[i].innerHTML = config.buttonLabel;
           btn[i].style.display = "inline-block";
         }
+      } else {
+        btn[i].innerHTML = config.buttonLabel;
+        btn[i].style.display = "inline-block";
       }
     })();
   }
