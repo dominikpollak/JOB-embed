@@ -1,3 +1,4 @@
+import { fetchCollectionDetail } from "../utils/fetchCollectionDetail.js";
 import { fetchNftListing } from "../utils/fetchNftListing.js";
 import { renderAssetElements } from "../utils/renderAssetElements.js";
 import { renderGraphs } from "../utils/renderGraphs.js";
@@ -23,19 +24,35 @@ renderGraphs(url);
 
 if (iframeListDiv) {
   const iframeConfig = JSON.parse(iframeListDiv.dataset.config);
-  const listIframe = document.createElement("iframe");
-  listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
-  listIframe.className = "job_list_iframe";
-  iframeListDiv.appendChild(listIframe);
+
+  (async () => {
+    const res = await fetchCollectionDetail(iframeConfig.policyId);
+    if (res.status === 200) {
+      const listIframe = document.createElement("iframe");
+      listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
+      listIframe.className = "job_list_iframe";
+      iframeListDiv.appendChild(listIframe);
+    } else {
+      iframeListDiv.classList.add("job-not-found-collection");
+    }
+  })();
 }
 
 if (iframeListDivs.length > 0) {
   for (let i = 0; i < iframeListDivs.length; i++) {
     const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
-    const listIframe = document.createElement("iframe");
-    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
-    listIframe.className = "job_list_iframe";
-    iframeListDivs[i].appendChild(listIframe);
+
+    (async () => {
+      const res = await fetchCollectionDetail(iframeConfig.policyId);
+      if (res.status === 200) {
+        const listIframe = document.createElement("iframe");
+        listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
+        listIframe.className = "job_list_iframe";
+        iframeListDivs[i].appendChild(listIframe);
+      } else {
+        iframeListDivs[i].classList.add("job-not-found-collection");
+      }
+    })();
   }
 }
 

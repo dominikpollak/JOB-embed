@@ -649,19 +649,34 @@
       query: params,
     });
 
+  const fetchCollectionDetail = async (collection) => {
+    try {
+      const res = await fetch(getUrl(`nfts/collections/${collection}`));
+      return res;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
   const fetchNftListing = async (policyId, assetNameHex) => {
     if (!policyId || !assetNameHex) return null;
 
-    const res = await fetch(
-      getUrl("nfts/listing", {
-        policyId,
-        assetNameHex,
-      })
-    );
+    try {
+      const res = await fetch(
+        getUrl("nfts/listing", {
+          policyId,
+          assetNameHex,
+        })
+      );
 
-    const data = await res.json();
+      const data = await res.json();
 
-    return data;
+      return data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   };
 
   const generateImgUrl = (assetFingerprint, size) => {
@@ -788,19 +803,35 @@
 
   if (iframeListDiv) {
     const iframeConfig = JSON.parse(iframeListDiv.dataset.config);
-    const listIframe = document.createElement("iframe");
-    listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
-    listIframe.className = "job_list_iframe";
-    iframeListDiv.appendChild(listIframe);
+
+    (async () => {
+      const res = await fetchCollectionDetail(iframeConfig.policyId);
+      if (res.status === 200) {
+        const listIframe = document.createElement("iframe");
+        listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
+        listIframe.className = "job_list_iframe";
+        iframeListDiv.appendChild(listIframe);
+      } else {
+        iframeListDiv.classList.add("job-not-found-collection");
+      }
+    })();
   }
 
   if (iframeListDivs.length > 0) {
     for (let i = 0; i < iframeListDivs.length; i++) {
       const iframeConfig = JSON.parse(iframeListDivs[i].dataset.config);
-      const listIframe = document.createElement("iframe");
-      listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
-      listIframe.className = "job_list_iframe";
-      iframeListDivs[i].appendChild(listIframe);
+
+      (async () => {
+        const res = await fetchCollectionDetail(iframeConfig.policyId);
+        if (res.status === 200) {
+          const listIframe = document.createElement("iframe");
+          listIframe.src = `${url}/iframe/collectionList/${iframeConfig.policyId}?theme=${jobConfig.theme}&lu=${jobConfig.logoUrl}&ls=${jobConfig.logoSize}&pn=${jobConfig.projectName}&nfs=${jobConfig.nameFontSize}&dv=${jobConfig.defaultView}&a=${jobConfig.affilCode}`;
+          listIframe.className = "job_list_iframe";
+          iframeListDivs[i].appendChild(listIframe);
+        } else {
+          iframeListDivs[i].classList.add("job-not-found-collection");
+        }
+      })();
     }
   }
 
