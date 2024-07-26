@@ -1,6 +1,6 @@
 import { generateImgUrl } from "./generateImgUrl";
 
-export const renderAssetElements = (url, price, fingerprint) => {
+export const renderAssetElements = (url, price, fingerprint, affilCode) => {
   const priceSpans = document.getElementsByClassName("iframe_price_span");
   const thumbnailSpans = document.getElementsByClassName(
     "iframe_thumbnail_span"
@@ -13,7 +13,9 @@ export const renderAssetElements = (url, price, fingerprint) => {
       if (fingerprint !== priceConfig.fingerprint) continue;
 
       const priceAnchor = document.createElement("a");
-      priceAnchor.href = `${url}/asset/${priceConfig.fingerprint}`;
+      priceAnchor.href = `${url}/asset/${priceConfig.fingerprint}${
+        affilCode ? `?a=${affilCode}` : ""
+      }`;
       priceAnchor.target = "_blank";
       priceAnchor.rel = "noopener noreferrer";
       priceAnchor.className = "job_element_price";
@@ -34,7 +36,9 @@ export const renderAssetElements = (url, price, fingerprint) => {
       if (fingerprint !== thumbnailConfig.fingerprint) continue;
 
       const thumbnailAnchor = document.createElement("a");
-      thumbnailAnchor.href = `${url}/asset/${thumbnailConfig.fingerprint}`;
+      thumbnailAnchor.href = `${url}/asset/${thumbnailConfig.fingerprint}${
+        affilCode ? `?a=${affilCode}` : ""
+      }`;
       thumbnailAnchor.target = "_blank";
       thumbnailAnchor.rel = "noopener noreferrer";
       thumbnailAnchor.className = "job_element_thumbnail";

@@ -87,7 +87,8 @@ for (let i = 0; i < btn.length; i++) {
         renderAssetElements(
           url,
           res.sellOrder ? res.sellOrder.price : 0,
-          config.fingerprint
+          config.fingerprint,
+          jobConfig.affilCode
         );
 
         // If user doesn't own the asset, don't show the list button
