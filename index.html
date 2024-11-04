@@ -12,7 +12,7 @@
     <button
       class="jamonbread job_asset_buy_button"
       data-config='{
-    "fingerprint": "1ltjute2cqnss02gpjckt9qv3r5jx2fpp93c0gr",
+    "fingerprint": "1cqxn80u7a743rfuqglmklrvnpxht3esudkqmj6",
     "buttonType" : "buy",
     "buttonLabel": "Buy now",
     "fallbackButtonLabel": ""
@@ -22,7 +22,7 @@
     <span
       class="iframe_price_span"
       data-config='{
-    "fingerprint": "1ltjute2cqnss02gpjckt9qv3r5jx2fpp93c0gr",
+    "fingerprint": "1cqxn80u7a743rfuqglmklrvnpxht3esudkqmj6",
     "priceFallback": ""
   }'
     ></span>
@@ -30,7 +30,7 @@
     <span
       class="iframe_thumbnail_span"
       data-config='{
-    "fingerprint": "1ltjute2cqnss02gpjckt9qv3r5jx2fpp93c0gr",
+    "fingerprint": "1cqxn80u7a743rfuqglmklrvnpxht3esudkqmj6",
     "size" : "md"
   }'
     ></span>
@@ -41,15 +41,8 @@
   "policyId" : "pavia"
 }'
     ></div>
-    <span
-      class="iframe_price_span"
-      data-config='{
-      "fingerprint": "1ltjute2cqnss02gpjckt9qv3r5jx2fpp93c0gr",
-      "priceFallback": ""
-    }'
-    ></span>
 
-    <!-- <div
+    <div
       class="iframe_graph_div"
       data-config='{
   "policyId" : "pavia",
@@ -58,7 +51,8 @@
   "showPriceRange" : true,
   "showListings" : true
 }'
-    ></div> -->
+    ></div>
+    <button id="generateButton">Generate</button>
 
     <script>
       window.jamConfig = {
@@ -78,5 +72,6 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/dominikpollak/JOB-embed@main/dist/bundle.js" /> -->
     <!-- <script src="https://i.jamonbread.io/host/embed.js"></script> -->
     <script src="dist/bundle.js"></script>
+    <script src="utils/generate.js"></script>
   </body>
 </html>

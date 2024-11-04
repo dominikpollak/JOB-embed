@@ -8,6 +8,8 @@ export const renderAssetElements = (url, price, fingerprint, affilCode) => {
 
   if (priceSpans.length > 0) {
     for (let i = 0; i < priceSpans.length; i++) {
+      if (priceSpans[i].dataset.processed) continue;
+      priceSpans[i].dataset.processed = "true";
       const priceConfig = JSON.parse(priceSpans[i].dataset.config);
 
       if (fingerprint !== priceConfig.fingerprint) continue;
@@ -31,6 +33,8 @@ export const renderAssetElements = (url, price, fingerprint, affilCode) => {
 
   if (thumbnailSpans.length > 0) {
     for (let i = 0; i < thumbnailSpans.length; i++) {
+      if (thumbnailSpans[i].dataset.processed) continue;
+      thumbnailSpans[i].dataset.processed = "true";
       const thumbnailConfig = JSON.parse(thumbnailSpans[i].dataset.config);
 
       if (fingerprint !== thumbnailConfig.fingerprint) continue;
