@@ -984,4 +984,4 @@
     childList: true,
     subtree: true,
   });
-});
+})();
