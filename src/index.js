@@ -172,12 +172,10 @@ const processElements = () => {
 
 processElements();
 
-// Set up a MutationObserver to watch for changes in the DOM
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     mutation.addedNodes.forEach((node) => {
       if (node.nodeType === 1) {
-        // Check if the node is an element
         const classList = node.classList;
         if (
           classList.contains("jamonbread") ||
@@ -192,7 +190,6 @@ const observer = new MutationObserver((mutations) => {
   });
 });
 
-// Start observing the document body for changes
 observer.observe(document.body, {
   childList: true,
   subtree: true,
